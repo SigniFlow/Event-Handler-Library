@@ -11,4 +11,3 @@ steps:
     sourceGitRepositoryPersonalAccessToken: '$(devops-token)'
     destinationGitRepositoryUri: 'https://github.com/SignFlow/Event-Handler-Library'
     destinationGitRepositoryPersonalAccessToken: '$(github-token)'
-    destinationVerifySSLCertificate: false
