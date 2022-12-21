@@ -5,18 +5,11 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: mirror-git-repository-vsts-task@1
-  displayName: 'Mirror to GitHub'
-  inputs:
-    sourceGitRepositoryUri: 'https://dev.azure.com/SigniFlow/SigniFlow%20Event%20Handler%20Library/_git/SigniFlow%20Event%20Handler%20Library'
-    sourceGitRepositoryPersonalAccessToken: '$(devops-token)'
-    destinationGitRepositoryUri: 'https://github.com/SignFlow/Event-Handler-Library'
-    destinationGitRepositoryPersonalAccessToken: '$(github-token)'
 - task: NuGetCommand@2
   displayName: 'NuGet Pack'
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.csproj'
+    packagesToPack: '**/SigniFlow.EventHandler.csproj'
 - task: NuGetCommand@2
   displayName: 'Nuget Push'
   inputs:
@@ -24,3 +17,10 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NuGet.org'
+- task: mirror-git-repository-vsts-task@1
+  displayName: 'Mirror to GitHub'
+  inputs:
+    sourceGitRepositoryUri: 'https://dev.azure.com/SigniFlow/SigniFlow%20Event%20Handler%20Library/_git/SigniFlow%20Event%20Handler%20Library'
+    sourceGitRepositoryPersonalAccessToken: '$(devops-token)'
+    destinationGitRepositoryUri: 'https://github.com/SignFlow/Event-Handler-Library'
+    destinationGitRepositoryPersonalAccessToken: '$(github-token)'
