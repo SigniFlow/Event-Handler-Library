@@ -17,15 +17,11 @@ namespace SigniFlow.EventHandler.Tests
         public void Setup()
         {
             this.SetupEventHandlerMock();
-            var authOptions = new EventHandlerAuthOptions
-            {
-                SigniFlowSecret = "testSecret"
-            };
-            var sfEvent = new SigniFlowEvent
-            {
-                ET = "document added",
-                SFS = "testSecret"
-            };
+
+            var authOptions= new EventHandlerAuthOptions("testSecret");
+
+            var sfEvent = new SigniFlowEvent(sfs: "testSecret", et: "Document Added", di: "123", ui: "123",
+                ue: "test@example.com", ed: DateTime.Now);
             this._eventDelegator = EventDelegatorFactory.GetEventDelegator(sfEvent, this._eventHandler.Object, authOptions);
         }
 

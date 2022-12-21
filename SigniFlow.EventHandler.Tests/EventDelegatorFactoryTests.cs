@@ -18,22 +18,17 @@ namespace SigniFlow.EventHandler.Tests
         {
             this._eventHandler = new Mock<IEventHandler>();
 
-            this._eventHandlerAuthOptions = new EventHandlerAuthOptions
-            {
-                SigniFlowSecret = "testSecret"
-            };
+            this._eventHandlerAuthOptions = new EventHandlerAuthOptions("testSecret");
 
-            this._signiflowEvent = new SigniFlowEvent
-            {
-                ET = "Document Added",
-                SFS = "testSecret"
-            };
+            this._signiflowEvent = new SigniFlowEvent(sfs: "testSecret", et: "Document Added", di: "123", ui: "123",
+                ue: "test@example.com", ed: DateTime.Now);
         }
 
         [Test]
         public void GetEventDelegator_ReturnEventDelegator()
         {
-            EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object, this._eventHandlerAuthOptions);
+            EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object,
+                this._eventHandlerAuthOptions);
         }
 
         [Test]
@@ -41,18 +36,22 @@ namespace SigniFlow.EventHandler.Tests
         [TestCase("An invalid event type")]
         public void GetEventDelegator_ThrowsInvalidEventTypeException_OnNullOrInvalidValue(string value)
         {
-            
+
             this._signiflowEvent.ET = value;
-            Assert.That(() => EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object, this._eventHandlerAuthOptions),
+            Assert.That(
+                () => EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object,
+                    this._eventHandlerAuthOptions),
                 Throws.TypeOf<InvalidEventTypeException>()
-                .With.Message.EqualTo($"Err: Unknown event type - '{this._signiflowEvent.ET}'"));
+                    .With.Message.EqualTo($"Err: Unknown event type - '{this._signiflowEvent.ET}'"));
         }
 
         [Test]
         public void GetEventDelegator_ThrowsInvalidSigniFlowSecretException_OnInvalidSecret()
         {
             this._signiflowEvent.SFS = "incorrect secret";
-            Assert.That(() => EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object, this._eventHandlerAuthOptions),
+            Assert.That(
+                () => EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object,
+                    this._eventHandlerAuthOptions),
                 Throws.TypeOf<InvalidSigniFlowSecretException>()
                     .With.Message.EqualTo("Err: SigniFlow Secret does not match."));
         }
@@ -61,7 +60,8 @@ namespace SigniFlow.EventHandler.Tests
         public void GetEventDelegator_ReturnsEventDelegator()
         {
             //Act
-            var eventDelegator = EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object, this._eventHandlerAuthOptions);
+            var eventDelegator = EventDelegatorFactory.GetEventDelegator(this._signiflowEvent,
+                this._eventHandler.Object, this._eventHandlerAuthOptions);
             //Assert
             Assert.That(eventDelegator, Is.InstanceOf<EventDelegator>());
         }
@@ -83,12 +83,14 @@ namespace SigniFlow.EventHandler.Tests
         [TestCase("Prepper Template Created", SigniFlowEventType.PrepperTemplateCreated)]
         [TestCase("Prepper Template Removed", SigniFlowEventType.PrepperTemplateRemoved)]
         [TestCase("Prepper Template Updated", SigniFlowEventType.PrepperTemplateUpdated)]
-        public void GetEventDelegator_EventTypeGetsSetToCorrectValue(string givenEventType, SigniFlowEventType expectedEventType)
+        public void GetEventDelegator_EventTypeGetsSetToCorrectValue(string givenEventType,
+            SigniFlowEventType expectedEventType)
         {
             //Arrange
             this._signiflowEvent.ET = givenEventType;
             //Act
-            var eventDelegator = EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object, this._eventHandlerAuthOptions);
+            var eventDelegator = EventDelegatorFactory.GetEventDelegator(this._signiflowEvent,
+                this._eventHandler.Object, this._eventHandlerAuthOptions);
             //Assert
             Assert.That(eventDelegator.EventType, Is.EqualTo(expectedEventType));
         }
@@ -99,12 +101,11 @@ namespace SigniFlow.EventHandler.Tests
             //Arrange
             this._eventHandler.SetupProperty(p => p.SigniflowEvent);
             //Act
-            var eventDelegator = EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object, this._eventHandlerAuthOptions);
+            var eventDelegator = EventDelegatorFactory.GetEventDelegator(this._signiflowEvent,
+                this._eventHandler.Object, this._eventHandlerAuthOptions);
 
             //Assert
             Assert.That(eventDelegator.EventHandler.SigniflowEvent, Is.Not.Null);
         }
     }
-
-
 }
