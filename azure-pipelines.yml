@@ -16,11 +16,11 @@ steps:
     command: 'pack'
     packagesToPack: '**/SigniFlow.EventHandler.csproj'
     versioningScheme: 'off'
-- task: DotNetCoreCLI@2
-  displayName: 'NuGet Push'
+- task: NuGetCommand@2
+  displayName: 'Nuget Push'
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NuGet.org'
 - task: mirror-git-repository-vsts-task@1
