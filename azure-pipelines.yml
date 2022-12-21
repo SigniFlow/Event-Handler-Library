@@ -7,7 +7,7 @@ pool:
 steps:
 - task: mirror-git-repository-vsts-task@1
   inputs:
-    sourceGitRepositoryUri: '$(Build.Repository.Uri)'
+    sourceGitRepositoryUri: 'https://dev.azure.com/SigniFlow/SigniFlow%20Event%20Handler%20Library/_git/SigniFlow%20Event%20Handler%20Library'
     sourceGitRepositoryPersonalAccessToken: '$(devops-token)'
     destinationGitRepositoryUri: 'https://github.com/SignFlow/Event-Handler-Library.git'
     destinationGitRepositoryPersonalAccessToken: '$(github-token)'
