@@ -6,19 +6,21 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: "DotNet Build"
   inputs:
     command: 'build'
     projects: '**/SigniFlow.EventHandler.csproj'
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   displayName: 'NuGet Pack'
   inputs:
     command: 'pack'
     packagesToPack: '**/SigniFlow.EventHandler.csproj'
-- task: NuGetCommand@2
-  displayName: 'Nuget Push'
+    versioningScheme: 'off'
+- task: DotNetCoreCLI@2
+  displayName: 'NuGet Push'
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NuGet.org'
 - task: mirror-git-repository-vsts-task@1
