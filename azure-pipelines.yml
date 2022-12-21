@@ -6,19 +6,19 @@ pool:
 
 steps:
 - task: mirror-git-repository-vsts-task@1
+  displayName: 'Mirror to GitHub'
   inputs:
     sourceGitRepositoryUri: 'https://dev.azure.com/SigniFlow/SigniFlow%20Event%20Handler%20Library/_git/SigniFlow%20Event%20Handler%20Library'
     sourceGitRepositoryPersonalAccessToken: '$(devops-token)'
     destinationGitRepositoryUri: 'https://github.com/SignFlow/Event-Handler-Library'
     destinationGitRepositoryPersonalAccessToken: '$(github-token)'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
 - task: NuGetCommand@2
+  displayName: 'NuGet Pack'
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
 - task: NuGetCommand@2
+  displayName: 'Nuget Push'
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
