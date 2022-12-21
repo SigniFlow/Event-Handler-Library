@@ -5,7 +5,24 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/SigniFlow.EventHandler.csproj'
+- task: NuGetCommand@2
+  displayName: 'NuGet Pack'
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/SigniFlow.EventHandler.csproj'
+- task: NuGetCommand@2
+  displayName: 'Nuget Push'
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'NuGet.org'
 - task: mirror-git-repository-vsts-task@1
+  displayName: 'Mirror to GitHub'
   inputs:
     sourceGitRepositoryUri: 'https://dev.azure.com/SigniFlow/SigniFlow%20Event%20Handler%20Library/_git/SigniFlow%20Event%20Handler%20Library'
     sourceGitRepositoryPersonalAccessToken: '$(devops-token)'
