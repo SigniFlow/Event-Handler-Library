@@ -11,9 +11,6 @@ steps:
     sourceGitRepositoryPersonalAccessToken: '$(devops-token)'
     destinationGitRepositoryUri: 'https://github.com/SignFlow/Event-Handler-Library'
     destinationGitRepositoryPersonalAccessToken: '$(github-token)'
-- task: NuGetAuthenticate@1
-  inputs:
-    nuGetServiceConnections: 'NuGet.org'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
