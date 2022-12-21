@@ -1,0 +1,13 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: mirror-git-repository-vsts-task@1
+  inputs:
+    sourceGitRepositoryUri: '$(Build.Repository.Uri)'
+    sourceGitRepositoryPersonalAccessToken: '$(devops-token)'
+    destinationGitRepositoryUri: 'https://github.com/SignFlow/Event-Handler-Library.git'
+    destinationGitRepositoryPersonalAccessToken: '$(github-token)'
