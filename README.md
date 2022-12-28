@@ -15,9 +15,7 @@ var app = builder.Build();
 var myAuthOptions = new EventHandlerAuthOptions(signiFlowSecret: "myEventHandlerSecret"); /// Your secret as set up in your business config in SigniFlow
 services.SetupEventHandler<MyEventHandlerImpl>(myAuthOptions); // You'll need to implement your own IEventHandler
 
-app.MapPost("/path/to/receiver",
-    ([FromServices] IEventHandler eventHandler, [FromServices] EventHandlerAuthOptions authOptions, SigniFlowEvent signiFlowEvent) 
-    => EventHandlerApi.HandleEvent(eventHandler, authOptions, signiFlowEvent));
+app.UseEventHandler("/path/to/receiver");
 
 // Run WebApp
 app.Run();
