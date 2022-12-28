@@ -3,16 +3,8 @@ using SigniFlow.EventHandler.ConfigurationModels;
 using SigniFlow.EventHandler.HttpModels;
 namespace SigniFlow.EventHandler.Api;
 
-public class EventHandlerApi
+public static class EventHandlerApi
 {
-    private readonly IEventHandler _eventHandler;
-    private readonly EventHandlerAuthOptions _authOptions;
-    public EventHandlerApi(IEventHandler eventHandler, EventHandlerAuthOptions authOptions)
-    {
-        _eventHandler = eventHandler;
-        _authOptions = authOptions;
-    }
-
     /// <summary>
     /// Handles a given <see cref="SigniFlowEvent"/>.
     /// </summary>
@@ -23,12 +15,14 @@ public class EventHandlerApi
     /// app.MapPost("/route/to/handler", eventHandler.HandleEvent);
     /// </code>
     /// </example>
-    /// <param name="signiFlowEvent"></param>
+    /// <param name="eventHandler">An Event Handler, typically supplied by DI</param>
+    /// <param name="authOptions">Auth Options for the Event Handler, typically supplied by DI</param>
+    /// <param name="signiFlowEvent">The Event to Handle</param>
     /// <returns></returns>
-    public async Task<string> HandleEvent(SigniFlowEvent signiFlowEvent)
+    public static async Task<string> HandleEvent(IEventHandler eventHandler, EventHandlerAuthOptions authOptions, SigniFlowEvent signiFlowEvent)
     {
         return (await EventDelegatorFactory
-            .GetEventDelegator(signiFlowEvent, this._eventHandler, this._authOptions)
+            .GetEventDelegator(signiFlowEvent, eventHandler, authOptions)
             .HandleEvent()).ToString();
     }
 }
