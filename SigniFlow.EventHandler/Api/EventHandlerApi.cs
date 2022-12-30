@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using SigniFlow.EventHandler.ConfigurationModels;
@@ -52,9 +53,20 @@ public static class EventHandlerApiExtensions
     /// <param name="route">The route to the endpoint on which the event handler will run</param>
     public static void UseEventHandler(this WebApplication app, string route)
     {
-        app.MapPost(route,
-            ([FromServices] IEventHandler eventHandler, [FromServices] EventHandlerAuthOptions authOptions,
-                SigniFlowEvent signiFlowEvent) =>
-                EventHandlerApi.HandleEvent(eventHandler, authOptions, signiFlowEvent));
+        app.MapPost(route, Handler);
+    }
+
+    private static async Task<string> Handler([FromServices] IEventHandler eventHandler,
+        [FromServices] EventHandlerAuthOptions authOptions, HttpContext ctx)
+    {
+        if (!ctx.Request.HasFormContentType)
+        {
+            return "Err:Invalid";
+        }
+        var form = await ctx.Request.ReadFormAsync();
+        var parsedDate = DateTime.TryParse(form["ED"], out var eventDate);
+        var signiFlowEvent = new SigniFlowEvent(form["SFS"], form["ET"], form["DI"], form["UI"], form["UE"],
+            parsedDate ? eventDate : DateTime.UtcNow);
+        return await EventHandlerApi.HandleEvent(eventHandler, authOptions, signiFlowEvent);
     }
 }
