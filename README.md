@@ -10,13 +10,16 @@ To learn what an Event Handler is, please consult our [Event Handler product pag
 This library supports [.NET 6 Minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-6.0):
 
 ```CSharp
-// Setup WebApp
+// Setup WebApp builder
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
 
 var myAuthOptions = new EventHandlerAuthOptions(signiFlowSecret: "myEventHandlerSecret"); /// Your secret as set up in your business config in SigniFlow
-services.SetupEventHandler<MyEventHandlerImpl>(myAuthOptions); // You'll need to implement your own IEventHandler
+builder.Services.SetupEventHandler<MyEventHandlerImpl>(myAuthOptions); // You'll need to implement your own IEventHandler
 
+// Build WebApp
+var app = builder.Build();
+
+// Register event handler API
 app.UseEventHandler("/path/to/receiver");
 
 // Run WebApp
