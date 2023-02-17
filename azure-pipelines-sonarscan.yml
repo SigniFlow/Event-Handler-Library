@@ -1,0 +1,30 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- checkout: self
+  fetchDepth: 0
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'flownamix'
+    scannerMode: 'MSBuild'
+    projectKey: 'SigniFlow_SigniFlow-Event-Handler-Library'
+    projectName: 'SigniFlow Event Handler Library'
+- task: DotNetCoreCLI@2
+  displayName: "DotNet Build"
+  inputs:
+    command: 'build'
+    projects: '**/SigniFlow.EventHandler.csproj'
+- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
