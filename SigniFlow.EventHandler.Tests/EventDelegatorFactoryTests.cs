@@ -21,7 +21,7 @@ namespace SigniFlow.EventHandler.Tests
             this._eventHandlerAuthOptions = new EventHandlerAuthOptions("testSecret");
 
             this._signiflowEvent = new SigniFlowEvent(sfs: "testSecret", et: "Document Added", di: "123", ui: "123",
-                ue: "test@example.com", ed: DateTime.Now);
+                ue: "test@example.com", ed: DateTime.Now, "", "");
         }
 
         [Test]

@@ -18,11 +18,12 @@ namespace SigniFlow.EventHandler.Tests
         {
             this.SetupEventHandlerMock();
 
-            var authOptions= new EventHandlerAuthOptions("testSecret");
+            var authOptions = new EventHandlerAuthOptions("testSecret");
 
             var sfEvent = new SigniFlowEvent(sfs: "testSecret", et: "Document Added", di: "123", ui: "123",
-                ue: "test@example.com", ed: DateTime.Now);
-            this._eventDelegator = EventDelegatorFactory.GetEventDelegator(sfEvent, this._eventHandler.Object, authOptions);
+                ue: "test@example.com", ed: DateTime.Now, "", "");
+            this._eventDelegator =
+                EventDelegatorFactory.GetEventDelegator(sfEvent, this._eventHandler.Object, authOptions);
         }
 
         private void SetupEventHandlerMock()
@@ -47,23 +48,91 @@ namespace SigniFlow.EventHandler.Tests
         {
             get
             {
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleDocumentAdded(), EventType = SigniFlowEventType.DocumentAdded };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleDocumentApproved(), EventType = SigniFlowEventType.DocumentApproved };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleDocumentCancelled(),  EventType = SigniFlowEventType.DocumentCancelled };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleDocumentCompleted(),  EventType = SigniFlowEventType.DocumentCompleted };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleDocumentDeleted(),  EventType = SigniFlowEventType.DocumentDeleted };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleDocumentPendingRelease(), EventType =  SigniFlowEventType.DocumentPendingRelease };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleDocumentRejected(),  EventType = SigniFlowEventType.DocumentPlaceholderRejected };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleDocumentReleased(), EventType =  SigniFlowEventType.DocumentReleased };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleDocumentSigned(), EventType =  SigniFlowEventType.DocumentSigned };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandlePlaceholderAdded(), EventType =  SigniFlowEventType.DocumentPlaceholderAdded };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandlePlaceholderReplaced(), EventType =  SigniFlowEventType.DocumentPlaceholderReplaced };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandlePlaceholderReverted(), EventType =  SigniFlowEventType.DocumentPlaceholderReverted };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandlePlaceholderUploaded(), EventType =  SigniFlowEventType.DocumentPlaceholderUploaded };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleFormSubmitted(), EventType =  SigniFlowEventType.FormSubmitted };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleTemplateCreated(), EventType =  SigniFlowEventType.PrepperTemplateCreated };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleRemplateRemoved(), EventType =  SigniFlowEventType.PrepperTemplateRemoved };
-                yield return new CallsCorrectEventHandlerParameter { MethodToCheck = (IEventHandler eh) => eh.HandleTemplateUpdated(), EventType =  SigniFlowEventType.PrepperTemplateUpdated };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleDocumentAdded(),
+                    EventType = SigniFlowEventType.DocumentAdded
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleDocumentApproved(),
+                    EventType = SigniFlowEventType.DocumentApproved
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleDocumentCancelled(),
+                    EventType = SigniFlowEventType.DocumentCancelled
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleDocumentCompleted(),
+                    EventType = SigniFlowEventType.DocumentCompleted
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleDocumentDeleted(),
+                    EventType = SigniFlowEventType.DocumentDeleted
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleDocumentPendingRelease(),
+                    EventType = SigniFlowEventType.DocumentPendingRelease
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleDocumentRejected(),
+                    EventType = SigniFlowEventType.DocumentPlaceholderRejected
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleDocumentReleased(),
+                    EventType = SigniFlowEventType.DocumentReleased
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleDocumentSigned(),
+                    EventType = SigniFlowEventType.DocumentSigned
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandlePlaceholderAdded(),
+                    EventType = SigniFlowEventType.DocumentPlaceholderAdded
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandlePlaceholderReplaced(),
+                    EventType = SigniFlowEventType.DocumentPlaceholderReplaced
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandlePlaceholderReverted(),
+                    EventType = SigniFlowEventType.DocumentPlaceholderReverted
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandlePlaceholderUploaded(),
+                    EventType = SigniFlowEventType.DocumentPlaceholderUploaded
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleFormSubmitted(),
+                    EventType = SigniFlowEventType.FormSubmitted
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleTemplateCreated(),
+                    EventType = SigniFlowEventType.PrepperTemplateCreated
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleRemplateRemoved(),
+                    EventType = SigniFlowEventType.PrepperTemplateRemoved
+                };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleTemplateUpdated(),
+                    EventType = SigniFlowEventType.PrepperTemplateUpdated
+                };
             }
         }
 
@@ -86,6 +155,5 @@ namespace SigniFlow.EventHandler.Tests
             public Expression<Action<IEventHandler>> MethodToCheck { get; set; }
             public SigniFlowEventType EventType { get; set; }
         }
-        
     }
 }
