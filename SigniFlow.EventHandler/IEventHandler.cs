@@ -72,5 +72,9 @@ namespace SigniFlow.EventHandler
         {
             return await Task.FromResult(SigniFlowEventResult.SuccessfulEvent);
         }
+        async Task<SigniFlowEventResult> HandleUnknownEvent()
+        {
+            return await Task.FromResult(new SigniFlowEventResult(true, "Unknown event"));
+        }
     }
 }

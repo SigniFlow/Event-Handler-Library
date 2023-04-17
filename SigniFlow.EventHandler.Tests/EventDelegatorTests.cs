@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using Moq;
 using SigniFlow.EventHandler;
 using SigniFlow.EventHandler.ConfigurationModels;
+using SigniFlow.EventHandler.Exceptions;
 using SigniFlow.EventHandler.HttpModels;
 namespace SigniFlow.EventHandler.Tests
 {
@@ -133,21 +134,36 @@ namespace SigniFlow.EventHandler.Tests
                     MethodToCheck = (IEventHandler eh) => eh.HandleTemplateUpdated(),
                     EventType = SigniFlowEventType.PrepperTemplateUpdated
                 };
+                yield return new CallsCorrectEventHandlerParameter
+                {
+                    MethodToCheck = (IEventHandler eh) => eh.HandleUnknownEvent(),
+                    EventType = SigniFlowEventType.Unknown
+                };
             }
         }
 
         [Test(Description = "Checks that the event delegator calls the correct method on the given event handler")]
-        [TestCaseSource("EventHandlerMethodMockTestCases")]
-        public void Calls_Correct_Event_Handler_Method(CallsCorrectEventHandlerParameter parameters)
+        [TestCaseSource(nameof(EventHandlerMethodMockTestCases))]
+        public async Task Calls_Correct_Event_Handler_Method(CallsCorrectEventHandlerParameter parameters)
         {
             //Setup the method that is to be checked
             this._eventHandler.Setup(parameters.MethodToCheck);
             //Call the method
             this._eventDelegator.EventType = parameters.EventType;
-            this._eventDelegator.HandleEvent();
+            await this._eventDelegator.HandleEvent();
 
             //Verify that the method has been called
             this._eventHandler.Verify(parameters.MethodToCheck);
+        }
+
+        [Test(Description =
+            "Checks that the event delegator throws an InvalidEventTypeException if the event type is invalid")]
+        [TestCase(255)]
+        public void Throws_InvalidEventTypeException_If_Event_Type_Invalid(SigniFlowEventType invalidEventType)
+        {
+            this._eventDelegator.EventType = invalidEventType;
+            //Assert that the correct exception is thrown
+            Assert.ThrowsAsync<InvalidEventTypeException>( async () => await this._eventDelegator.HandleEvent());
         }
 
         public class CallsCorrectEventHandlerParameter

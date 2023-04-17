@@ -27,22 +27,9 @@ namespace SigniFlow.EventHandler.Tests
         [Test]
         public void GetEventDelegator_ReturnEventDelegator()
         {
-            EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object,
+            var delegator = EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object,
                 this._eventHandlerAuthOptions);
-        }
-
-        [Test]
-        [TestCase(null)]
-        [TestCase("An invalid event type")]
-        public void GetEventDelegator_ThrowsInvalidEventTypeException_OnNullOrInvalidValue(string value)
-        {
-
-            this._signiflowEvent.ET = value;
-            Assert.That(
-                () => EventDelegatorFactory.GetEventDelegator(this._signiflowEvent, this._eventHandler.Object,
-                    this._eventHandlerAuthOptions),
-                Throws.TypeOf<InvalidEventTypeException>()
-                    .With.Message.EqualTo($"Err: Unknown event type - '{this._signiflowEvent.ET}'"));
+            Assert.That(delegator, Is.Not.EqualTo(null));
         }
 
         [Test]
@@ -79,10 +66,12 @@ namespace SigniFlow.EventHandler.Tests
         [TestCase("Document Rejected", SigniFlowEventType.DocumentPlaceholderRejected)]
         [TestCase("Document Released", SigniFlowEventType.DocumentReleased)]
         [TestCase("Document Signed", SigniFlowEventType.DocumentSigned)]
+        [TestCase("Document Completed", SigniFlowEventType.DocumentCompleted)]
         [TestCase("Form Submitted", SigniFlowEventType.FormSubmitted)]
         [TestCase("Prepper Template Created", SigniFlowEventType.PrepperTemplateCreated)]
         [TestCase("Prepper Template Removed", SigniFlowEventType.PrepperTemplateRemoved)]
         [TestCase("Prepper Template Updated", SigniFlowEventType.PrepperTemplateUpdated)]
+        [TestCase("Unknown Event", SigniFlowEventType.Unknown)]
         public void GetEventDelegator_EventTypeGetsSetToCorrectValue(string givenEventType,
             SigniFlowEventType expectedEventType)
         {

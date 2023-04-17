@@ -47,7 +47,7 @@ namespace SigniFlow.EventHandler
                 "prepper template created" => SigniFlowEventType.PrepperTemplateCreated,
                 "prepper template removed" => SigniFlowEventType.PrepperTemplateRemoved,
                 "prepper template updated" => SigniFlowEventType.PrepperTemplateUpdated,
-                _ => throw new InvalidEventTypeException($"Err: Unknown event type - '{eventType}'")
+                _ => SigniFlowEventType.Unknown
             };
         }
     }

@@ -89,9 +89,14 @@ namespace SigniFlow.EventHandler
         * Event Type:   Prepper Template Updated
         * Description:  A document prepper template has been updated on the system.
         */
-        PrepperTemplateUpdated
+        PrepperTemplateUpdated,
+        /*
+         * Event Type:  Unknown
+         * Description: Unknown event type. This is used to catch any event types that are not known.
+         */
+        Unknown = -1
     }
-    
+
     /// <exception cref="InvalidEventTypeException">If the event type is unknown</exception>
     public class EventDelegator
     {
@@ -125,6 +130,7 @@ namespace SigniFlow.EventHandler
                 SigniFlowEventType.PrepperTemplateCreated => await this.EventHandler.HandleTemplateCreated(),
                 SigniFlowEventType.PrepperTemplateRemoved => await this.EventHandler.HandleRemplateRemoved(),
                 SigniFlowEventType.PrepperTemplateUpdated => await this.EventHandler.HandleTemplateUpdated(),
+                SigniFlowEventType.Unknown => await this.EventHandler.HandleUnknownEvent(),
                 _ => throw new InvalidEventTypeException($"Err: Unknown event type - '{this.EventType}'")
             };
         }
