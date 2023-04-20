@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Util", "Util", "{D1089DBF-E
 	ProjectSection(SolutionItems) = preProject
 		azure-pipelines.yml = azure-pipelines.yml
 		README.md = README.md
+		azure-pipelines-sonarscan.yml = azure-pipelines-sonarscan.yml
 	EndProjectSection
 EndProject
 Global
