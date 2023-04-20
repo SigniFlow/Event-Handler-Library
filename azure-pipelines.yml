@@ -15,7 +15,7 @@ steps:
   inputs:
     sourceGitRepositoryUri: 'https://dev.azure.com/SigniFlow/SigniFlow%20Event%20Handler%20Library/_git/SigniFlow%20Event%20Handler%20Library'
     sourceGitRepositoryPersonalAccessToken: '$(devops-token)'
-    destinationGitRepositoryUri: 'https://github.com/SignFlow/Event-Handler-Library'
+    destinationGitRepositoryUri: 'https://github.com/SigniFlow/Event-Handler-Library'
     destinationGitRepositoryPersonalAccessToken: '$(github-token)'
 - task: DotNetCoreCLI@2
   displayName: 'NuGet Pack'
