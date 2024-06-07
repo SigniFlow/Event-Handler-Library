@@ -22,7 +22,7 @@ namespace SigniFlow.EventHandler.Tests
             var authOptions = new EventHandlerAuthOptions("testSecret");
 
             var sfEvent = new SigniFlowEvent(sfs: "testSecret", et: "Document Added", di: "123", ui: "123",
-                ue: "test@example.com", ed: DateTime.Now, "", "");
+                ue: "test@example.com", ed: DateTime.Now, "", "", adf:"additional data");
             this._eventDelegator =
                 EventDelegatorFactory.GetEventDelegator(sfEvent, this._eventHandler.Object, authOptions);
         }

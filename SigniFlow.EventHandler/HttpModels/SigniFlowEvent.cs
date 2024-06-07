@@ -2,7 +2,7 @@
 
 public class SigniFlowEvent
 {
-    public SigniFlowEvent(string sfs, string et, string di, string ui, string ue, DateTime ed, string fi, string fn)
+    public SigniFlowEvent(string sfs, string et, string di, string ui, string ue, DateTime ed, string fi, string fn, string adf)
     {
         SFS = sfs;
         ET = et;
@@ -12,6 +12,7 @@ public class SigniFlowEvent
         ED = ed;
         FI = fi;
         FN = fn;
+        ADF = adf;
     }
     /// <summary>Password/Key that is saved in the Event Handler and SigniFlow, which gets passed on each reqeust in order to validate the server/request.</summary>
     public string SFS { get; set; }
@@ -36,4 +37,6 @@ public class SigniFlowEvent
 
     /// <summary>Date and time on which event took place.</summary>
     public DateTime ED { get; set; }
+    /// <summary>Additional data sent through for the event.</summary>
+    public string? ADF { get; set; }
 }

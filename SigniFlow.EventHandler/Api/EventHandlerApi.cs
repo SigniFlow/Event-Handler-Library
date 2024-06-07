@@ -66,7 +66,7 @@ public static class EventHandlerApiExtensions
         var form = await ctx.Request.ReadFormAsync();
         var parsedDate = DateTime.TryParse(form["ED"], out var eventDate);
         var signiFlowEvent = new SigniFlowEvent(form["SFS"], form["ET"], form["DI"], form["UI"], form["UE"],
-            parsedDate ? eventDate : DateTime.UtcNow, form["FI"], form["FN"]);
+            parsedDate ? eventDate : DateTime.UtcNow, form["FI"], form["FN"], form["ADF"]);
         return await EventHandlerApi.HandleEvent(eventHandler, authOptions, signiFlowEvent);
     }
 }
