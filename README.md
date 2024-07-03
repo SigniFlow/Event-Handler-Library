@@ -1,7 +1,7 @@
-# Event-Handler-Library
+# SigniFlow-SmsHandler-Library
 A library for creating SigniFlow Event Handlers
 
-[![Nuget](https://img.shields.io/nuget/v/SigniFlow.EventHandler) ![Nuget](https://img.shields.io/nuget/dt/SigniFlow.EventHandler)](https://www.nuget.org/packages/SigniFlow.EventHandler/)
+[![Nuget] ![Nuget]]
 
 To learn what an Event Handler is, please consult our [Event Handler product page](https://www.signiflow.com/connect-with-eventhandler/)
 
