@@ -7,7 +7,7 @@ To learn what an Event Handler is, please consult our [Event Handler product pag
 
 ## Usage
 
-This library supports [.NET 6 Minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-6.0):
+This library supports [.NET Minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-8.0):
 
 ```CSharp
 // Setup WebApp builder

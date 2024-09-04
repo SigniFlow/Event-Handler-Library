@@ -1,10 +1,9 @@
-﻿namespace SigniFlow.EventHandler.ConfigurationModels
+﻿namespace SigniFlow.EventHandler.ConfigurationModels;
+
+public class EventHandlerAuthOptions
 {
-    public class EventHandlerAuthOptions
-    {
-        public EventHandlerAuthOptions(string signiFlowSecret) {
-            SigniFlowSecret = signiFlowSecret;
-        }
-        public string SigniFlowSecret { get; set; }
+    public EventHandlerAuthOptions(string signiFlowSecret) {
+        SigniFlowSecret = signiFlowSecret;
     }
+    public string SigniFlowSecret { get; set; }
 }
