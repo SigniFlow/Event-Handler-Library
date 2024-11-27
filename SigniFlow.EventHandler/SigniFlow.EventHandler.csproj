@@ -6,11 +6,11 @@
         <Nullable>enable</Nullable>
         <IsPackable>true</IsPackable>
         <PackageId>SigniFlow.EventHandler</PackageId>
-        <PackageVersion>1.0.8</PackageVersion>
-        <RepositoryUrl>https://github.com/SignFlow/Event-Handler-Library</RepositoryUrl>
+        <PackageVersion>1.0.9</PackageVersion>
+        <RepositoryUrl>https://github.com/SigniFlow/Event-Handler-Library</RepositoryUrl>
         <Authors>SigniFlow</Authors>
         <PackageProjectUrl>https://signiflow.com</PackageProjectUrl>
-        <Copyright>Copyright (c) SigniFlow 2024</Copyright>
+        <Copyright>Copyright (c) SigniFlow 2025</Copyright>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
