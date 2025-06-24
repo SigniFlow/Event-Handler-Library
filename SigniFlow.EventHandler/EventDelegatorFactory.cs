@@ -39,6 +39,7 @@ public static class EventDelegatorFactory
             "document released" => SigniFlowEventType.DocumentReleased,
             "document signed" => SigniFlowEventType.DocumentSigned,
             "document completed" => SigniFlowEventType.DocumentCompleted,
+            "document viewed" => SigniFlowEventType.DocumentViewed,
             "document placeholder added" => SigniFlowEventType.DocumentPlaceholderAdded,
             "document placeholder replaced" => SigniFlowEventType.DocumentPlaceholderReplaced,
             "document placeholder reverted" => SigniFlowEventType.DocumentPlaceholderReverted,

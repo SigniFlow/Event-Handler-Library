@@ -25,6 +25,11 @@ public enum SigniFlowEventType
      */
     DocumentCompleted,
     /*
+     * Event Type:   Document Viewed
+     * Description:  Document has been viewed by a user in the workflow.
+     */
+    DocumentViewed,
+    /*
      * Event Type:   Document Delete
      * Description:  Document has been marked as deleted.
      */
@@ -117,6 +122,7 @@ public class EventDelegator
             SigniFlowEventType.DocumentApproved => await this.EventHandler.HandleDocumentApproved(),
             SigniFlowEventType.DocumentCancelled => await this.EventHandler.HandleDocumentCancelled(),
             SigniFlowEventType.DocumentCompleted => await this.EventHandler.HandleDocumentCompleted(),
+            SigniFlowEventType.DocumentViewed => await this.EventHandler.HandleDocumentViewed(),
             SigniFlowEventType.DocumentDeleted => await this.EventHandler.HandleDocumentDeleted(),
             SigniFlowEventType.DocumentPendingRelease => await this.EventHandler.HandleDocumentPendingRelease(),
             SigniFlowEventType.DocumentPlaceholderAdded => await this.EventHandler.HandlePlaceholderAdded(),

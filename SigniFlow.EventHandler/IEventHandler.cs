@@ -24,6 +24,10 @@ public interface IEventHandler
     {
         return await Task.FromResult(SigniFlowEventResult.SuccessfulEvent);
     }
+    async Task<SigniFlowEventResult> HandleDocumentViewed()
+    {
+        return await Task.FromResult(SigniFlowEventResult.SuccessfulEvent);
+    }
     async Task<SigniFlowEventResult> HandleDocumentPendingRelease()
     {
         return await Task.FromResult(SigniFlowEventResult.SuccessfulEvent);

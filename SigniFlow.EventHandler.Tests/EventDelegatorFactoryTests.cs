@@ -67,6 +67,7 @@ public class EventDelegatorFactoryTests
     [TestCase("Document Released", SigniFlowEventType.DocumentReleased)]
     [TestCase("Document Signed", SigniFlowEventType.DocumentSigned)]
     [TestCase("Document Completed", SigniFlowEventType.DocumentCompleted)]
+    [TestCase("Document Viewed", SigniFlowEventType.DocumentViewed)]
     [TestCase("Form Submitted", SigniFlowEventType.FormSubmitted)]
     [TestCase("Prepper Template Created", SigniFlowEventType.PrepperTemplateCreated)]
     [TestCase("Prepper Template Removed", SigniFlowEventType.PrepperTemplateRemoved)]
