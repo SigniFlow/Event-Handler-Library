@@ -23,12 +23,7 @@ steps:
     command: 'pack'
     packagesToPack: '**/SigniFlow.EventHandler.csproj'
     versioningScheme: 'off'
-- task: DotNetCoreCLI@2
-  displayName: 'Nuget Push'
+- task: NuGetAuthenticate@1
   inputs:
-    command: custom
-    custom: nuget
-    arguments: >
-      push $(Build.ArtifactStagingDirectory)**/*.nupkg
-      -s $(NuGetSourceServerUrl)
-      -k $(NuGetSourceServerApiKey)
+    nugetServiceConnections: 'NuGet.org'
+- script: dotnet nuget push --api-key AzureArtifacts '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
