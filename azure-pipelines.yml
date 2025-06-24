@@ -23,7 +23,7 @@ steps:
     command: 'pack'
     packagesToPack: '**/SigniFlow.EventHandler.csproj'
     versioningScheme: 'off'
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   displayName: 'Nuget Push'
   inputs:
     command: 'push'
