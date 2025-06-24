@@ -23,5 +23,4 @@ steps:
     command: 'pack'
     packagesToPack: '**/SigniFlow.EventHandler.csproj'
     versioningScheme: 'off'
-- task: NuGetAuthenticate@1
 - script: dotnet nuget push --api-key $(nuget-token) --source 'https://api.nuget.org/v3/index.json' '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
