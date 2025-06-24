@@ -23,4 +23,4 @@ steps:
     command: 'pack'
     packagesToPack: '**/SigniFlow.EventHandler.csproj'
     versioningScheme: 'off'
-- script: dotnet nuget push --api-key $(nuget-token) --source 'https://api.nuget.org/v3/index.json' '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+- script: dotnet nuget push --api-key $(nuget-token) --source https://api.nuget.org/v3/index.json '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
