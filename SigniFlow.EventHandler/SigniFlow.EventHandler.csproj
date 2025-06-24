@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <IsPackable>true</IsPackable>
         <PackageId>SigniFlow.EventHandler</PackageId>
-        <PackageVersion>1.0.9</PackageVersion>
+        <PackageVersion>1.0.10</PackageVersion>
         <RepositoryUrl>https://github.com/SigniFlow/Event-Handler-Library</RepositoryUrl>
         <Authors>SigniFlow</Authors>
         <PackageProjectUrl>https://signiflow.com</PackageProjectUrl>

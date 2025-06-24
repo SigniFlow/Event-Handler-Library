@@ -71,6 +71,11 @@ public class EventDelegatorTests
             };
             yield return new CallsCorrectEventHandlerParameter
             {
+                MethodToCheck = (IEventHandler eh) => eh.HandleDocumentViewed(),
+                EventType = SigniFlowEventType.DocumentViewed
+            };
+            yield return new CallsCorrectEventHandlerParameter
+            {
                 MethodToCheck = (IEventHandler eh) => eh.HandleDocumentDeleted(),
                 EventType = SigniFlowEventType.DocumentDeleted
             };
